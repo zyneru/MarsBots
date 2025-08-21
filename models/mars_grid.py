@@ -9,7 +9,7 @@ MAX_GRID_SIZE = 50
 class MarsGrid:
     x_max: int
     y_max: int
-    lost_position_moves: list[PositionMove] = field(default_factory=set)
+    lost_position_moves: set[PositionMove] = field(default_factory=set)
 
     def __post_init__(self):
         if not isinstance(self.x_max, int) or self.x_max < 0 or self.x_max > MAX_GRID_SIZE:
