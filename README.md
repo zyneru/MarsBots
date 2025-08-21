@@ -10,6 +10,7 @@ MarsBots simulates the movement of robots on a rectangular Mars grid, following 
   - [`models/directions.py`](models/directions.py): Direction enum and turning logic.
   - [`models/mars_grid.py`](models/mars_grid.py): Mars grid definition.
   - [`models/moves.py`](models/moves.py): Move enum and validation.
+  - [`models/position_move.py`](models/position_move.py): Position and move tracking for lost bots.
 - `functions/`: Contains bot movement logic:
   - [`functions/bot_mover.py`](functions/bot_mover.py): Bot movement and position calculation.
 - `sample_data.txt`: Example input and output.
@@ -20,9 +21,9 @@ MarsBots simulates the movement of robots on a rectangular Mars grid, following 
 1. Ensure you have Python 3.11+ installed.
 2. Set up your environment:
    ```
-   export PYTHONPATH=.
+   set PYTHONPATH=.
    ```
-   Or use the provided `.env` file.
+   (On Windows, use `set` instead of `export`.)
 3. Run the simulation:
    ```
    python marsbots.py
@@ -32,3 +33,9 @@ MarsBots simulates the movement of robots on a rectangular Mars grid, following 
 ## Sample Input/Output
 
 See [`sample_data.txt`](sample_data.txt) for example scenarios.
+
+## Notes
+
+- The grid size is validated to be between 0 and 50.
+- Bots that move off the grid are marked as "LOST" and their last position is tracked to prevent future bots from being lost at the same spot.
+- Move commands are validated; invalid moves or directions will prompt for re-entry.
