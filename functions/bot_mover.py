@@ -4,6 +4,7 @@ from models.mars_grid import MarsGrid
 from models.bot import Bot
 from models.directions import Direction
 from models.moves import Move
+from models.position_move import PositionMove
 
 def move_bot(mars_grid: MarsGrid, bot: Bot, moves: list[Move]):
     for move in moves:
@@ -17,7 +18,13 @@ def move_bot(mars_grid: MarsGrid, bot: Bot, moves: list[Move]):
                 bot.x_position = new_x
                 bot.y_position = new_y
             else:
+                position_move = PositionMove(bot.x_position, bot.y_position, bot.direction)
+
+                if mars_grid.is_position_move_lost(position_move):
+                    continue
+
                 bot.is_lost = True
+                mars_grid.add_lost_position(position_move)
                 break
 
 def get_next_position(bot: Bot):
