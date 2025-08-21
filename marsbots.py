@@ -34,6 +34,7 @@ from models.mars_grid import MarsGrid
 from models.mars_grid import MAX_GRID_SIZE
 from models.moves import Move
 from models.moves import validate_moves
+from models.moves import MAX_MOVES
 from functions.bot_mover import move_bot
 
 def capture_grid() -> MarsGrid | None:
@@ -111,7 +112,7 @@ def capture_moves() -> list[Move] | None:
         None: If the input contains invalid move commands.
     """
     try:
-        moves_input = input("Enter the bot's move command: ").upper()
+        moves_input = input(f"Enter the bot's move command (max: {MAX_MOVES}): ").upper()
         return validate_moves(moves_input)
     except KeyError:
         print(f"Invalid move input: '{moves_input}'. Each move must be one of {[m.name for m in Move]}")
